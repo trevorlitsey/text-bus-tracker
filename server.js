@@ -2,10 +2,7 @@ require('dotenv').config();
 
 const http = require('http');
 const express = require('express');
-const twilio = require('twilio')(
-  process.env.TWILIO_ACCOUNT_SID,
-  process.env.TWILIO_AUTH_TOKEN
-);
+const MessagingResponse = require('twilio').twiml.MessagingResponse;
 const axios = require('axios');
 
 const app = express();
@@ -28,7 +25,7 @@ app.get('/', (req, res) => {
 });
 
 app.post('/sms', async (req, res) => {
-  var twiml = new twilio.TwimlResponse();
+  const twiml = new MessagingResponse();
 
   try {
     const eighteenDepartureTimes = await fetchAndFormatDepartureTimes(EIGHTEEN);
