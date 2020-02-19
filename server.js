@@ -23,6 +23,10 @@ const formatDepartureTimes = data =>
 const fetchAndFormatDepartureTimes = url =>
   axios(url).then(res => formatDepartureTimes(res.data));
 
+app.get('/', (req, res) => {
+  res.send('ok');
+});
+
 app.post('/sms', async (req, res) => {
   var twiml = new twilio.TwimlResponse();
 
