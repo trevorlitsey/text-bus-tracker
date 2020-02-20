@@ -1,6 +1,7 @@
 require('dotenv').config();
 
 const http = require('http');
+const bodyParser = require('body-parser');
 const express = require('express');
 const MessagingResponse = require('twilio').twiml.MessagingResponse;
 const axios = require('axios');
@@ -117,6 +118,8 @@ const getSouthboundRoutes = async () => {
 app.get('/', (req, res) => {
   res.send('ok');
 });
+
+app.use('/sms', bodyParser.urlencoded({ extended: false }));
 
 app.post('/sms', async (req, res) => {
   const twiml = new MessagingResponse();
